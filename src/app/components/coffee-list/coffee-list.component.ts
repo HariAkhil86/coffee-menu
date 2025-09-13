@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';   
 import { CoffeeService, Coffee } from '../../services/coffee.service';
 
 @Component({
   selector: 'app-coffee-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],  
   templateUrl: './coffee-list.component.html',
   styleUrls: ['./coffee-list.component.css']
 })
@@ -13,6 +14,22 @@ export class CoffeeListComponent implements OnInit {
   coffees: Coffee[] = [];
   loading = true;
   error: string | null = null;
+
+  onImageError(event: any) {
+  event.target.src = 'https://via.placeholder.com/150';
+}
+
+
+  
+  searchTerm: string = '';
+
+  get filteredCoffees(): Coffee[] {
+    return this.coffees
+    .filter(coffee => coffee.title)
+    .filter(coffee =>
+      coffee.title!.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
 
   constructor(private coffeeService: CoffeeService) {}
 
