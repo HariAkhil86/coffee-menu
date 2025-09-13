@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+import { CoffeeListComponent }  from './components/coffee-list/coffee-list.component';
 
 @Component({
   selector: 'app-root',
-  imports: [],
+  standalone: true,
+  imports: [CoffeeListComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'coffee-menu';
